@@ -1,0 +1,14 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <center><h2>Registro de Usuario - Masivo</h2></center>
+    <br/><br/>
+   <form method="post">
+        {% csrf_token %}
+        <table>
+          {{ form }}
+        </table>
+        <br/>
+        <button type="submit">Crear</button>
+   </form>
+{% endblock %}

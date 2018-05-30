@@ -1,0 +1,95 @@
+{% extends "base.html" %}
+
+{% block title %}ConstruMarket | Pagos {% endblock %}
+
+{% block content %}
+    <h2>Pagos</h2>
+    <br/><br/>
+
+    <form action="" method="POST">
+        {% csrf_token %}
+        <div class="form-group col-sm-4">
+            <label class="control-label col-sm-2" for="email">Cliente:</label>
+            <div class="col-sm-10">
+                <input type="text" class="form-control" name="nombre_cliente" placeholder="Nombre del cliente"
+                       id="buscador">
+            </div>
+        </div>
+        <div class="form-group col-sm-4">
+            <label class="control-label col-sm-2" for="pwd">Valor:</label>
+            <div class="col-sm-10">
+                <input type="text" class="form-control" name="valor" placeholder="Valor de compra" id="buscador">
+            </div>
+        </div>
+        <div class="form-group col-sm-8">
+            <div class="col-sm-offset-10 col-sm-10">
+                <button type="submit" class="btn btn-default align-right">Consultar</button>
+            </div>
+        </div>
+    </form>
+    {% if lista_detalle_pagos %}
+        <div class="row">
+            <div class="col-md-8 col-sm-12">
+                {% block main-content %}
+                    <table class="table table-striped">
+                        <tr>
+                            <th>Cliente</th>
+                            <th>Producto</th>
+                            <th>Cantidad</th>
+                            <th>Fecha Pago</th>
+                            <th>Medio Pago</th>
+                            <th>Valor</th>
+                        </tr>
+                        {% for detalle_pago in lista_detalle_pagos %}
+                            <tr>
+                                <td>{{ detalle_pago.id_orden.id_cliente.primer_nombre }}</td>
+
+                                {% for detalle_orden in detalle_pago.id_orden.detalle_orden_set.all %}
+                                    <td>
+                                        {{ detalle_orden.id_producto }}
+                                    </td>
+                                    <td>
+                                        {{ detalle_orden.cantidad }}
+                                    </td>
+                                {% endfor %}
+
+                                <td>{{ detalle_pago.fecha_pago|date:"M d, Y" }}</td>
+                                <td>{{ detalle_pago.medio_pago }}</td>
+                                <td>{{ detalle_pago.valor_total }}</td>
+                            </tr>
+                        {% endfor %}
+                    </table>
+                    <div class="pagination">
+                        <span class="step-links">
+                            {% if lista_detalle_pagos.has_previous %}
+                                <a href="?page=1">&laquo; first</a>
+                                <a href="?page={{ lista_detalle_pagos.previous_page_number }}">previous</a>
+                            {% endif %}
+
+                            <span class="current">
+                                Page {{ lista_detalle_pagos.number }} of {{ lista_detalle_pagos.paginator.num_pages }}.
+                            </span>
+
+                            {% if lista_detalle_pagos.has_next %}
+                                <a href="?page={{ lista_detalle_pagos.next_page_number }}">next</a>
+                                <a href="?page={{ lista_detalle_pagos.paginator.num_pages }}">last &raquo;</a>
+                            {% endif %}
+                        </span>
+                    </div>
+                {% endblock %}
+            </div>
+            <div class="col-md-4 hidden-sm">
+                {% block sidebar %}{% endblock %}
+            </div>
+        </div>
+    {% else %}
+        <div class="row">
+            <div class="col-md-8 col-sm-12">
+                <p>No hay pagos disponibles.</p>
+            </div>
+        </div>
+    {% endif %}
+    <div>
+        <p><a href="/inicio">Regresar</a></p>
+    </div>
+{% endblock %}

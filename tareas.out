@@ -1,0 +1,26 @@
+Traceback (most recent call last):
+  File "/usr/local/bin/celery", line 11, in <module>
+    sys.exit(main())
+  File "/usr/local/lib/python2.7/dist-packages/celery/__main__.py", line 14, in main
+    _main()
+  File "/usr/local/lib/python2.7/dist-packages/celery/bin/celery.py", line 326, in main
+    cmd.execute_from_commandline(argv)
+  File "/usr/local/lib/python2.7/dist-packages/celery/bin/celery.py", line 488, in execute_from_commandline
+    super(CeleryCommand, self).execute_from_commandline(argv)))
+  File "/usr/local/lib/python2.7/dist-packages/celery/bin/base.py", line 279, in execute_from_commandline
+    argv = self.setup_app_from_commandline(argv)
+  File "/usr/local/lib/python2.7/dist-packages/celery/bin/base.py", line 481, in setup_app_from_commandline
+    self.app = self.find_app(app)
+  File "/usr/local/lib/python2.7/dist-packages/celery/bin/base.py", line 503, in find_app
+    return find_app(app, symbol_by_name=self.symbol_by_name)
+  File "/usr/local/lib/python2.7/dist-packages/celery/app/utils.py", line 355, in find_app
+    sym = symbol_by_name(app, imp=imp)
+  File "/usr/local/lib/python2.7/dist-packages/celery/bin/base.py", line 506, in symbol_by_name
+    return imports.symbol_by_name(name, imp=imp)
+  File "/usr/local/lib/python2.7/dist-packages/kombu/utils/imports.py", line 56, in symbol_by_name
+    module = imp(module_name, package=package, **kwargs)
+  File "/usr/local/lib/python2.7/dist-packages/celery/utils/imports.py", line 101, in import_from_cwd
+    return imp(module, package=package)
+  File "/usr/lib/python2.7/importlib/__init__.py", line 37, in import_module
+    __import__(name)
+ImportError: No module named construMartket

@@ -1,0 +1,8 @@
+
+{% load staticfiles %}
+
+{% if detalle_pago %}
+    <p>Detalle del pago: {{  detalle_pago.descripcion  }}</p>
+{% else %}
+   <p>No hay detalle del pago</p>
+{% endif%}
